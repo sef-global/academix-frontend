@@ -1,0 +1,22 @@
+.content {
+    min-height: 100vh;
+    background: white;
+}
+
+.logo {
+    height: 31px;
+    margin: 10px 24px 16px 0;
+    float: left;
+}
+
+.logo img {
+    width: 120px;
+    padding-bottom: 24px;
+}
+
+.header {
+    background: white;
+    padding-right: 0;
+    z-index: 1;
+    box-shadow: 0 2px 8px #f0f1f2;
+}
