@@ -5,15 +5,28 @@
 ### Prerequisites
 1. Tomcat 9
 2. Maven
+3. MySQL 8
+4. sef-core
 
-### Building the project
+### Building the SEF-Core
 
-1. Build the project using maven
+- Sef core includes APIs and the admin dashboard for the academic application.
+  In order to work with academix-frontend, you need to build sef-core and deploy it on tomcat (core.war and dashboard.war).
+  Follow instructions in [sef-core](https://github.com/sef-global/sef-core/blob/master/Readme.md) to build it.  
+  
+### Building the academix frontend
+
+1. Clone your forked academix-frontend repository
+    ```
+    git clone https://github.com/USERNAME/academix-frontend
+    cd academix-frontend
+    ```
+2. Build the project using maven
    ```
    mvn install
    ```
     
-2. Copy the generated `.war` file to the tomcat's webapp directory.  
+3. Copy the generated `.war` file to the tomcat's webapp directory.  
    ```
    cp target/academix.war /path/to/tomcat/webapps
    ```
@@ -41,18 +54,20 @@
 
 #### Rebuild using npm
 This will rebuild the app and update the deployed application on the tomcat because it has been linked with symlinks.
-```
-cd app/
-npm run build
-```
+
+   ```
+   cd app/
+   npm run build
+   ```
 (You should create the symlinks first)
 
 #### Auto update while developing application
 Run the watch command,
-```
-cd app/
-npm run watch
-```
+
+  ```
+  cd app/
+  npm run watch
+  ```
 This will watch files and recompile whenever they change.
 
 (You should create the symlinks first)
