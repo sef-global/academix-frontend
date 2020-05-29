@@ -9,7 +9,7 @@ import { SingleRoute } from './interfaces';
 const routes: SingleRoute[] = [
   {
     path: '/academix',
-    exact: false,
+    exact: true,
     component: Home,
   },
 ];
