@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'antd';
 import styles from './styles.css';
 import heroImg from './hero.jpg';
 import logo from '../../../public/academix-logo.png';
-import Categories from '../Home/components/catogories/index';
+import Categories from './components/catogories';
 
 class Home extends React.Component {
   render() {
