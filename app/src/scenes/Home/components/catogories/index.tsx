@@ -17,7 +17,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
 
   componentDidMount() {
     axios
-      .get('http://www.mocky.io/v2/5ecfd2c33200009dc1e3d626')
+      .get('http://www.mocky.io/v2/5ed3224e340000820001f251')
       .then((result: AxiosResponse<Category[]>) => {
         if (result.status == 200) {
           this.setState({
@@ -39,10 +39,10 @@ class Categories extends React.Component<{}, CategoryStateProps> {
         <Row>
           {this.state.categories.map((category) => (
             <Col key={category.id} md={8}>
-              <Link to={`${category.id}/${category.translations.en.name}`}>
+              <Link to={`${category.id}/${category.translations[0].name}`}>
                 <Card hoverable className={styles.card} bordered={true}>
                   <h1 className={styles.categoryName}>
-                    <BookOutlined /> {category.translations.en.name}
+                    <BookOutlined /> {category.translations[0].name}
                   </h1>
                 </Card>
               </Link>
