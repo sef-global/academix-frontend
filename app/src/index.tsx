@@ -5,12 +5,24 @@ import App from './components/App';
 import * as serviceWorker from './services/serviceWorkers/serviceWorker';
 import Home from './scenes/Home';
 import { SingleRoute } from './interfaces';
+import Items from './scenes/Items';
+import SubCategories from './scenes/SubCategories';
 
 const routes: SingleRoute[] = [
   {
     path: '/academix',
     exact: true,
     component: Home,
+  },
+  {
+    path: '/academix/sub/:subCategoryId/:subCategoryName',
+    exact: true,
+    component: Items,
+  },
+  {
+    path: '/academix/:categoryId/:categoryName',
+    exact: true,
+    component: SubCategories,
   },
 ];
 

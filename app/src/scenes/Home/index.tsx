@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Button } from 'antd';
-import styles from './styles.css';
+import styles from './styles.module.css';
 import heroImg from './hero.jpg';
 import logo from '../../../public/academix-logo.png';
 import Categories from './components/catogories';
