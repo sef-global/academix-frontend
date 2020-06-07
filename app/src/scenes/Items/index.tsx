@@ -1,11 +1,13 @@
 import React from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../services/util/errorHandler';
-import { ItemPayload, ItemStateProps, ItemUrlParams } from './interfaces';
-import { List, Typography } from 'antd';
+import { Item, ItemPayload, ItemStateProps, ItemUrlParams } from './interfaces';
+import { List, Button, Modal, Typography } from 'antd';
 import { RouteComponentProps } from 'react-router';
 import styles from './styles.module.css';
 import { SubCategory } from '../../interfaces';
+
+const { Title } = Typography;
 
 class Items extends React.Component<
   RouteComponentProps<ItemUrlParams>,
@@ -13,12 +15,14 @@ class Items extends React.Component<
 > {
   pageSize: number;
   SubCategoryId: string;
-  constructor(props: RouteComponentProps<any>) {
+  constructor(props: RouteComponentProps<ItemUrlParams>) {
     super(props);
     this.pageSize = 10;
     this.SubCategoryId = this.props.match.params.subCategoryId;
     this.state = {
       isLoading: false,
+      isModalVisible: false,
+      selectedItem: null,
       items: [],
       subCategory: null,
       pagination: {
@@ -86,33 +90,72 @@ class Items extends React.Component<
       });
   };
 
+  showModal = (item: Item) => {
+    this.setState({
+      isModalVisible: true,
+      selectedItem: item,
+    });
+  };
+
+  handleModalCancel = () => {
+    this.setState({
+      isModalVisible: false,
+    });
+  };
+
   render() {
-    const { Title } = Typography;
-    let title = '';
-    if (this.state.subCategory != null) {
-      title = this.state.subCategory.translations[0].name;
-    }
     return (
-      <List
-        header={<Title level={3}>{title}</Title>}
-        className={styles.mainContent}
-        pagination={{
-          onChange: this.fetchItems,
-          pageSize: this.pageSize,
-          total: this.state.pagination.total,
-        }}
-        loading={this.state.isLoading}
-        itemLayout="horizontal"
-        dataSource={this.state.items}
-        renderItem={(item) => (
-          <List.Item key={item.id}>
-            <List.Item.Meta
-              title={item.translations[0].name}
-              className={styles.listItem}
-            />
-          </List.Item>
+      <div>
+        {this.state.selectedItem != null && (
+          <Modal
+            title={this.state.selectedItem.translations[0].name}
+            visible={this.state.isModalVisible}
+            onCancel={this.handleModalCancel}
+            footer={[
+              <Button
+                key={this.state.selectedItem.id}
+                type="primary"
+                href={this.state.selectedItem.link}
+                target="_blank"
+              >
+                Visit source
+              </Button>,
+            ]}
+          >
+            <p>{this.state.selectedItem.translations[0].description}</p>
+          </Modal>
         )}
-      />
+        <List
+          header={
+            this.state.subCategory != null && (
+              <Title level={3}>
+                {this.state.subCategory.translations[0].name}
+              </Title>
+            )
+          }
+          className={styles.mainContent}
+          pagination={{
+            onChange: this.fetchItems,
+            pageSize: this.pageSize,
+            total: this.state.pagination.total,
+          }}
+          loading={this.state.isLoading}
+          itemLayout="horizontal"
+          dataSource={this.state.items}
+          renderItem={(item) => (
+            <List.Item
+              key={item.id}
+              onClick={() => this.showModal(item)}
+              className={styles.pointer}
+            >
+              <List.Item.Meta
+                title={item.translations[0].name}
+                className={styles.listItem}
+              />
+            </List.Item>
+          )}
+        />
+      </div>
     );
   }
 }

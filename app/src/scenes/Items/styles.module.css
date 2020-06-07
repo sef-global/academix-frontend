@@ -5,3 +5,7 @@
 .listItem{
     padding: 20px;
 }
+
+.pointer{
+    cursor: pointer;
+}
