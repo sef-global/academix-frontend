@@ -24,6 +24,8 @@ class Categories extends React.Component<{}, CategoryStateProps> {
           this.setState({
             categories: result.data,
           });
+        } else {
+          throw new Error();
         }
       })
       .catch((error) => {
