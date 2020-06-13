@@ -1,9 +1,12 @@
 import React from 'react';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Typography } from 'antd';
 import styles from './styles.module.css';
 import heroImg from './hero.jpg';
 import logo from '../../../public/academix-logo.png';
 import Categories from './components/catogories';
+import SLEFLogo from './SLEFLogo.png';
+
+const { Title } = Typography;
 
 class Home extends React.Component {
   render() {
@@ -12,7 +15,7 @@ class Home extends React.Component {
         <Col md={0} lg={3} />
         <Col md={24} lg={21}>
           <Row className={styles.mainContent}>
-            <Col md={12} className={styles.descriptionContent}>
+            <Col md={10} className={styles.descriptionContent}>
               <img src={logo} alt="Academix Logo" width={350} />
               <p className={styles.description}>
                 AcadeMix aims to curate a collection of free education resources
@@ -20,11 +23,19 @@ class Home extends React.Component {
                 potential from Primary through to Post Graduate education and
                 beyond.
               </p>
-              <Button type="primary" size="large">
-                Learn More
-              </Button>
+              <Row>
+                <Title level={4}>
+                  AcadeMiX is built in collaboration with,
+                </Title>
+              </Row>
+              <Col md={6} lg={3}>
+                <Row>
+                  <img src={SLEFLogo} alt="SLEF Logo" width={220} />
+                </Row>
+              </Col>
             </Col>
-            <Col md={12}>
+            <Col md={1} />
+            <Col md={13}>
               <img width="80%" src={heroImg} alt="Hero image" />
             </Col>
           </Row>
