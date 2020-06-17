@@ -4,9 +4,11 @@
 
 .descriptionContent {
     padding-top: 180px;
-
+    text-align: justify;
 }
+
 .description {
     padding-top: 30px;
     font-size: 1.3em;
+    margin-bottom: 30px;
 }
