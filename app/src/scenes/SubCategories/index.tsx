@@ -76,7 +76,7 @@ class SubCategories extends React.Component<
     const { Title } = Typography;
     let title = '';
     if (this.state.category != null) {
-      title = this.state.category.translations[1].name;
+      title = this.state.category.translations[0].name;
     }
     return (
       <List
