@@ -83,22 +83,29 @@ class SubCategories extends React.Component<
         header={<Title level={2}>{title}</Title>}
         className={styles.mainContent}
         dataSource={this.state.subCategories}
-        renderItem={(subCategory) => (
-          <Link
-            to={`/academix/sub/${subCategory.id}/${subCategory.translations[0].name}`}
-          >
-            <Card.Grid key={subCategory.id}>
-              <List.Item>
-                <List.Item.Meta
-                  title={
-                    <Title level={4}>{subCategory.translations[0].name}</Title>
-                  }
-                  className={styles.listItem}
-                />
-              </List.Item>
-            </Card.Grid>
-          </Link>
-        )}
+        renderItem={(subCategory) => {
+          // Replace spaces and slashes from the subcategory name to include it on the URL
+          const subCategoryName = subCategory.translations[0].name
+            .trim()
+            .replace(/\s+|\//g, '-')
+            .toLowerCase();
+          return (
+            <Link to={`/academix/sub/${subCategory.id}/${subCategoryName}`}>
+              <Card.Grid key={subCategory.id}>
+                <List.Item>
+                  <List.Item.Meta
+                    title={
+                      <Title level={4}>
+                        {subCategory.translations[0].name}
+                      </Title>
+                    }
+                    className={styles.listItem}
+                  />
+                </List.Item>
+              </Card.Grid>
+            </Link>
+          );
+        }}
       />
     );
   }
