@@ -40,19 +40,24 @@ class Categories extends React.Component<{}, CategoryStateProps> {
     return (
       <Col md={20} offset={2}>
         <Row>
-          {this.state.categories.map((category) => (
-            <Col key={category.id} md={8}>
-              <Link
-                to={`/academix/${category.id}/${category.translations[0].name}`}
-              >
-                <Card hoverable className={styles.card} bordered={true}>
-                  <h1 className={styles.categoryName}>
-                    <BookOutlined /> {category.translations[0].name}
-                  </h1>
-                </Card>
-              </Link>
-            </Col>
-          ))}
+          {this.state.categories.map((category) => {
+            // Replace spaces and slashes from the category name to include it on the URL
+            const categoryName = category.translations[0].name
+              .trim()
+              .replace(/\s+|\//g, '-')
+              .toLowerCase();
+            return (
+              <Col key={category.id} md={8}>
+                <Link to={`/academix/${category.id}/${categoryName}`}>
+                  <Card hoverable className={styles.card} bordered={true}>
+                    <h1 className={styles.categoryName}>
+                      <BookOutlined /> {category.translations[0].name}
+                    </h1>
+                  </Card>
+                </Link>
+              </Col>
+            );
+          })}
         </Row>
       </Col>
     );
