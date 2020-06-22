@@ -28,11 +28,11 @@ class Home extends React.Component {
                   AcadeMiX is built in collaboration with,
                 </Title>
               </Row>
-              <Col md={6} lg={3}>
-                <Row>
+              <Row>
+                <Col md={6} lg={3}>
                   <img src={SLEFLogo} alt="SLEF Logo" width={220} />
-                </Row>
-              </Col>
+                </Col>
+              </Row>
             </Col>
             <Col md={1} />
             <Col md={13}>
