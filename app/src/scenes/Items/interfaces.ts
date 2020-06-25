@@ -1,11 +1,8 @@
-import { SubCategory } from '../../interfaces';
-
 export interface ItemStateProps {
   items: Item[];
   isLoading: boolean;
   isModalVisible: boolean;
   selectedItem: Item | null;
-  subCategory: SubCategory | null;
   pagination: {
     current: number,
     pageSize: number,
