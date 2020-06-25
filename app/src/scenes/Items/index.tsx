@@ -2,12 +2,9 @@ import React from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../services/util/errorHandler';
 import { Item, ItemPayload, ItemStateProps, ItemUrlParams } from './interfaces';
-import { List, Button, Modal, Typography } from 'antd';
+import { List, Button, Modal } from 'antd';
 import { RouteComponentProps } from 'react-router';
 import styles from './styles.module.css';
-import { SubCategory } from '../../interfaces';
-
-const { Title } = Typography;
 
 class Items extends React.Component<
   RouteComponentProps<ItemUrlParams>,
@@ -24,7 +21,6 @@ class Items extends React.Component<
       isModalVisible: false,
       selectedItem: null,
       items: [],
-      subCategory: null,
       pagination: {
         current: 1,
         total: 0,
@@ -35,31 +31,7 @@ class Items extends React.Component<
 
   componentDidMount() {
     this.fetchItems();
-    this.fetchSubCategoryDetails();
   }
-
-  fetchSubCategoryDetails = () => {
-    axios
-      .get(
-        window.location.origin +
-          `/core/academix/sub-categories/${this.SubCategoryId}`
-      )
-      .then((result: AxiosResponse<SubCategory>) => {
-        if (result.status == 200) {
-          this.setState({
-            subCategory: result.data,
-          });
-        } else {
-          throw new Error();
-        }
-      })
-      .catch((error) => {
-        handleApiError(
-          error,
-          'Something went wrong when trying to load subcategory details'
-        );
-      });
-  };
 
   fetchItems = (pageNo = 1) => {
     const pageNumber = pageNo - 1;
@@ -103,6 +75,13 @@ class Items extends React.Component<
     });
   };
 
+  componentDidUpdate() {
+    if (this.SubCategoryId !== this.props.match.params.subCategoryId) {
+      this.SubCategoryId = this.props.match.params.subCategoryId;
+      this.fetchItems();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -126,13 +105,6 @@ class Items extends React.Component<
           </Modal>
         )}
         <List
-          header={
-            this.state.subCategory != null && (
-              <Title level={3}>
-                {this.state.subCategory.translations[0].name}
-              </Title>
-            )
-          }
           className={styles.mainContent}
           pagination={{
             onChange: this.fetchItems,

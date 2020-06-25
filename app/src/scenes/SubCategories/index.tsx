@@ -4,9 +4,10 @@ import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../services/util/errorHandler';
 import { SubCategoryStateProps, CategoryUrlParams } from './interfaces';
 import { RouteComponentProps } from 'react-router';
-import { List, Card, Typography } from 'antd';
-import { Link } from 'react-router-dom';
+import { Menu, Typography } from 'antd';
+import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Category, SubCategory } from '../../interfaces';
+import Items from '../Items';
 
 class SubCategories extends React.Component<
   RouteComponentProps<CategoryUrlParams>,
@@ -19,6 +20,7 @@ class SubCategories extends React.Component<
     this.state = {
       subCategories: [],
       category: null,
+      current: '',
     };
   }
 
@@ -72,6 +74,12 @@ class SubCategories extends React.Component<
       });
   };
 
+  handleClick = (e: { key: string }) => {
+    this.setState({
+      current: e.key,
+    });
+  };
+
   render() {
     const { Title } = Typography;
     let title = '';
@@ -79,34 +87,39 @@ class SubCategories extends React.Component<
       title = this.state.category.translations[0].name;
     }
     return (
-      <List
-        header={<Title level={2}>{title}</Title>}
-        className={styles.mainContent}
-        dataSource={this.state.subCategories}
-        renderItem={(subCategory) => {
-          // Replace spaces and slashes from the subcategory name to include it on the URL
-          const subCategoryName = subCategory.translations[0].name
-            .trim()
-            .replace(/\s+|\//g, '-')
-            .toLowerCase();
-          return (
-            <Link to={`/academix/sub/${subCategory.id}/${subCategoryName}`}>
-              <Card.Grid key={subCategory.id}>
-                <List.Item>
-                  <List.Item.Meta
-                    title={
-                      <Title level={4}>
-                        {subCategory.translations[0].name}
-                      </Title>
-                    }
-                    className={styles.listItem}
-                  />
-                </List.Item>
-              </Card.Grid>
-            </Link>
-          );
-        }}
-      />
+      <Router>
+        <Title level={2} className={styles.mainContent}>
+          {title}
+        </Title>
+        <Menu
+          mode="horizontal"
+          onClick={this.handleClick}
+          selectedKeys={[this.state.current]}
+        >
+          {this.state.subCategories.map((subCategory) => {
+            // Replace spaces and slashes from the subcategory name to include it on the URL
+            const categoryName = title
+              .trim()
+              .replace(/\s+|\//g, '-')
+              .toLowerCase();
+            return (
+              <Menu.Item key={subCategory.id} className={styles.menuItem}>
+                <Link
+                  to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}`}
+                >
+                  {subCategory.translations[0].name}
+                </Link>
+              </Menu.Item>
+            );
+          })}
+        </Menu>
+        <Switch>
+          <Route
+            path="/academix/:categoryId/:categoryName/:subCategoryId"
+            component={Items}
+          />
+        </Switch>
+      </Router>
     );
   }
 }
