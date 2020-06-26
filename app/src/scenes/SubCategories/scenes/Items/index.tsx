@@ -1,6 +1,6 @@
 import React from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { handleApiError } from '../../services/util/errorHandler';
+import { handleApiError } from '../../../../services/util/errorHandler';
 import { Item, ItemPayload, ItemStateProps, ItemUrlParams } from './interfaces';
 import { List, Button, Modal } from 'antd';
 import { RouteComponentProps } from 'react-router';
