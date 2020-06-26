@@ -7,7 +7,7 @@ import { RouteComponentProps } from 'react-router';
 import { Menu, Typography } from 'antd';
 import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Category, SubCategory } from '../../interfaces';
-import Items from '../Items';
+import Items from './scenes/Items';
 
 class SubCategories extends React.Component<
   RouteComponentProps<CategoryUrlParams>,
