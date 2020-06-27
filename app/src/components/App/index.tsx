@@ -1,12 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.less';
 import RouteWithSubRoutes from '../RouteWithSubRoutes';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  Link,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { SingleRoute } from '../../interfaces';
 import { AppProps } from './interfaces';
 import { Layout, Menu } from 'antd';
@@ -32,9 +27,9 @@ class App extends React.Component<AppProps> {
         <Layout style={{ background: '#fff' }}>
           <Header className={styles.header}>
             <div className={styles.logo}>
-              <Link to="https://sefglobal.org/">
+              <a href="https://sefglobal.org/">
                 <img src={seflogo} alt="SEF Logo" />
-              </Link>
+              </a>
             </div>
             <Menu theme="light" mode="horizontal">
               <Menu.Item key="1">
