@@ -18,5 +18,24 @@
     background: white;
     padding-right: 0;
     z-index: 1;
-    box-shadow: 0 2px 8px #f0f1f2;
+    margin-left: 7%;
+    margin-right: 10%;
+    margin-top: 1.5%
 }
+
+.footer {
+    padding-right : 0;
+    z-index: 1;
+    text-align : center;
+}
+
+.iconList {
+    margin-right : 20px;
+    float: right;
+}
+
+.icon {
+    margin-right: 20px;
+}
+
+

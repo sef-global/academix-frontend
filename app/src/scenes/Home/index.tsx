@@ -12,7 +12,7 @@ class Home extends React.Component {
   render() {
     return (
       <Row>
-        <Col md={0} lg={3} />
+        <Col md={0} lg={2} />
         <Col md={24} lg={21}>
           <Row className={styles.mainContent}>
             <Col md={10} className={styles.descriptionContent}>
@@ -34,8 +34,8 @@ class Home extends React.Component {
                 </Col>
               </Row>
             </Col>
-            <Col md={1} />
-            <Col md={13}>
+            <Col md={2} />
+            <Col md={12}>
               <img width="80%" src={heroImg} alt="Hero image" />
             </Col>
           </Row>
