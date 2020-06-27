@@ -148,7 +148,7 @@ class SubCategories extends React.Component<
             <Route path="/academix/:categoryId/:categoryName/:subCategoryId">
               <Items setCurrent={this.setCurrent} />
             </Route>
-            //Todo: Use history.push to redirect to the first subcategory
+            {/* Todo: Use history.push to redirect to the first subcategory*/}
             {this.state.subCategories.length > 0 && (
               <Redirect
                 exact
