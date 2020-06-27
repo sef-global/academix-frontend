@@ -1,21 +1,28 @@
 import React from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../../../services/util/errorHandler';
-import { Item, ItemPayload, ItemStateProps, ItemUrlParams } from './interfaces';
+import {
+  Item,
+  ItemPayload,
+  ItemProps,
+  ItemStateProps,
+  ItemUrlParams,
+} from './interfaces';
 import { List, Button, Modal } from 'antd';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import styles from './styles.module.css';
 
 class Items extends React.Component<
-  RouteComponentProps<ItemUrlParams>,
+  RouteComponentProps<ItemUrlParams> & ItemProps,
   ItemStateProps
 > {
   pageSize: number;
   SubCategoryId: string;
-  constructor(props: RouteComponentProps<ItemUrlParams>) {
+  constructor(props: RouteComponentProps<ItemUrlParams> & ItemProps) {
     super(props);
     this.pageSize = 10;
     this.SubCategoryId = this.props.match.params.subCategoryId;
+    this.props.setCurrent(this.SubCategoryId);
     this.state = {
       isLoading: false,
       isModalVisible: false,
@@ -105,7 +112,6 @@ class Items extends React.Component<
           </Modal>
         )}
         <List
-          className={styles.mainContent}
           pagination={{
             onChange: this.fetchItems,
             pageSize: this.pageSize,
@@ -132,4 +138,4 @@ class Items extends React.Component<
   }
 }
 
-export default Items;
+export default withRouter(Items);

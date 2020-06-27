@@ -4,8 +4,14 @@ import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../services/util/errorHandler';
 import { SubCategoryStateProps, CategoryUrlParams } from './interfaces';
 import { RouteComponentProps } from 'react-router';
-import { Menu, Typography } from 'antd';
-import { Link, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Col, Menu, PageHeader, Row, Typography } from 'antd';
+import {
+  Link,
+  Route,
+  BrowserRouter as Router,
+  withRouter,
+  Redirect,
+} from 'react-router-dom';
 import { Category, SubCategory } from '../../interfaces';
 import Items from './scenes/Items';
 
@@ -80,6 +86,16 @@ class SubCategories extends React.Component<
     });
   };
 
+  setCurrent = (subCategoryId: string) => {
+    this.setState({
+      current: subCategoryId,
+    });
+  };
+
+  onBack = () => {
+    this.props.history.push('/academix');
+  };
+
   render() {
     const { Title } = Typography;
     let title = '';
@@ -88,40 +104,62 @@ class SubCategories extends React.Component<
     }
     return (
       <Router>
-        <Title level={2} className={styles.mainContent}>
-          {title}
-        </Title>
-        <Menu
-          mode="horizontal"
-          onClick={this.handleClick}
-          selectedKeys={[this.state.current]}
-        >
-          {this.state.subCategories.map((subCategory) => {
-            // Replace spaces and slashes from the subcategory name to include it on the URL
-            const categoryName = title
-              .trim()
-              .replace(/\s+|\//g, '-')
-              .toLowerCase();
-            return (
-              <Menu.Item key={subCategory.id} className={styles.menuItem}>
-                <Link
-                  to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}`}
-                >
-                  {subCategory.translations[0].name}
-                </Link>
-              </Menu.Item>
-            );
-          })}
-        </Menu>
-        <Switch>
-          <Route
-            path="/academix/:categoryId/:categoryName/:subCategoryId"
-            component={Items}
-          />
-        </Switch>
+        <Row className={styles.mainContent}>
+          <Col md={20}>
+            <PageHeader
+              className={styles.pageHeader}
+              onBack={this.onBack}
+              title={
+                <Title className={styles.pageTitle} level={2}>
+                  {title}
+                </Title>
+              }
+            />
+          </Col>
+        </Row>
+        <Row className={styles.mainContent}>
+          <Col md={20}>
+            <Menu
+              mode="horizontal"
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+            >
+              {this.state.subCategories.map((subCategory) => {
+                // Replace spaces and slashes from the subcategory name to include it on the URL
+                const categoryName = title
+                  .trim()
+                  .replace(/\s+|\//g, '-')
+                  .toLowerCase();
+                return (
+                  <Menu.Item key={subCategory.id} className={styles.menuItem}>
+                    <Link
+                      to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}`}
+                    >
+                      {subCategory.translations[0].name}
+                    </Link>
+                  </Menu.Item>
+                );
+              })}
+            </Menu>
+          </Col>
+        </Row>
+        <Row className={styles.mainContent}>
+          <Col md={20}>
+            <Route path="/academix/:categoryId/:categoryName/:subCategoryId">
+              <Items setCurrent={this.setCurrent} />
+            </Route>
+            //Todo: Use history.push to redirect to the first subcategory
+            {this.state.subCategories.length > 0 && (
+              <Redirect
+                exact
+                to={`${this.props.match.url}/${this.state.subCategories[0].id}`}
+              />
+            )}
+          </Col>
+        </Row>
       </Router>
     );
   }
 }
 
-export default SubCategories;
+export default withRouter(SubCategories);
