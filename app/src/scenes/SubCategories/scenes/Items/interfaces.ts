@@ -30,3 +30,7 @@ export interface ItemPayload {
 export interface ItemUrlParams {
   subCategoryId: string;
 }
+
+export interface ItemProps {
+  setCurrent: (subCategoryId: string) => void;
+}
