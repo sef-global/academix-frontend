@@ -1,8 +1,6 @@
 export interface ItemStateProps {
   items: Item[];
   isLoading: boolean;
-  isModalVisible: boolean;
-  selectedItem: Item | null;
   pagination: {
     current: number,
     pageSize: number,
