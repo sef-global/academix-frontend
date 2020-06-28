@@ -10,3 +10,16 @@
 .pointer{
     cursor: pointer;
 }
+
+.cardContainer :global .ant-card{
+    position: relative;
+    border-radius: .5rem;
+    min-height: 300px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+.cardContainer :global .ant-btn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}

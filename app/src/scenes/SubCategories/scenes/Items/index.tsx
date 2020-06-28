@@ -2,13 +2,13 @@ import React from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../../../services/util/errorHandler';
 import {
-  Item,
   ItemPayload,
   ItemProps,
   ItemStateProps,
   ItemUrlParams,
 } from './interfaces';
-import { List, Button, Modal } from 'antd';
+import { List, Button, Card, Row, Typography, Col } from 'antd';
+import { ArrowRightOutlined } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router';
 import styles from './styles.module.css';
 
@@ -20,13 +20,11 @@ class Items extends React.Component<
   SubCategoryId: string;
   constructor(props: RouteComponentProps<ItemUrlParams> & ItemProps) {
     super(props);
-    this.pageSize = 10;
+    this.pageSize = 8;
     this.SubCategoryId = this.props.match.params.subCategoryId;
     this.props.setCurrent(this.SubCategoryId);
     this.state = {
       isLoading: false,
-      isModalVisible: false,
-      selectedItem: null,
       items: [],
       pagination: {
         current: 1,
@@ -69,19 +67,6 @@ class Items extends React.Component<
       });
   };
 
-  showModal = (item: Item) => {
-    this.setState({
-      isModalVisible: true,
-      selectedItem: item,
-    });
-  };
-
-  handleModalCancel = () => {
-    this.setState({
-      isModalVisible: false,
-    });
-  };
-
   componentDidUpdate() {
     if (this.SubCategoryId !== this.props.match.params.subCategoryId) {
       this.SubCategoryId = this.props.match.params.subCategoryId;
@@ -90,50 +75,50 @@ class Items extends React.Component<
   }
 
   render() {
+    const { Paragraph, Title } = Typography;
     return (
-      <div>
-        {this.state.selectedItem != null && (
-          <Modal
-            title={this.state.selectedItem.translations[0].name}
-            visible={this.state.isModalVisible}
-            onCancel={this.handleModalCancel}
-            footer={[
-              <Button
-                key={this.state.selectedItem.id}
-                type="primary"
-                href={this.state.selectedItem.link}
-                target="_blank"
-              >
-                Visit source
-              </Button>,
-            ]}
-          >
-            <p>{this.state.selectedItem.translations[0].description}</p>
-          </Modal>
-        )}
+      <Col className={styles.cardContainer}>
         <List
           pagination={{
             onChange: this.fetchItems,
             pageSize: this.pageSize,
             total: this.state.pagination.total,
           }}
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 2,
+            md: 4,
+            lg: 4,
+            xl: 4,
+            xxl: 4,
+          }}
           loading={this.state.isLoading}
           itemLayout="horizontal"
           dataSource={this.state.items}
           renderItem={(item) => (
-            <List.Item
-              key={item.id}
-              onClick={() => this.showModal(item)}
-              className={styles.pointer}
-            >
-              <List.Item.Meta
-                title={item.translations[0].name}
-                className={styles.listItem}
-              />
+            <List.Item key={item.id}>
+              <Card>
+                <Title level={4}>{item.translations[0].name}</Title>
+                <Paragraph ellipsis={{ rows: 8, expandable: true }}>
+                  {item.translations[0].description}
+                </Paragraph>
+                <Row className={styles.cardRounded}>
+                  <Button
+                    href={item.link}
+                    type="primary"
+                    target="_blank"
+                    shape="circle"
+                    size={'large'}
+                  >
+                    <ArrowRightOutlined />
+                  </Button>
+                </Row>
+              </Card>
             </List.Item>
           )}
         />
-      </div>
+      </Col>
     );
   }
 }

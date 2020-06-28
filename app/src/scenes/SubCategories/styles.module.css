@@ -4,18 +4,28 @@
     justify-content: center;
 }
 
-.menuItem{
-    text-align: center;
-    margin-left: 30px;
-    margin-right: 30px;
-    font-size: 15px;
-}
-
 .pageTitle{
     margin-top: 14px;
+}
+
+.headerWrapper :global .ant-page-header{
+    padding: 0;
 }
 
 .pageHeader :global .anticon{
     font-size: 25px;
     vertical-align: middle;
+}
+
+.subCategoryWrapperRow {
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.subCategoryButton {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

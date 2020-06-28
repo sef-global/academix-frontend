@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../services/util/errorHandler';
 import { SubCategoryStateProps, CategoryUrlParams } from './interfaces';
 import { RouteComponentProps } from 'react-router';
-import { Col, Menu, PageHeader, Row, Typography } from 'antd';
+import { Button, Col, PageHeader, Row, Typography } from 'antd';
 import {
   Link,
   Route,
@@ -33,6 +33,9 @@ class SubCategories extends React.Component<
   componentDidMount() {
     this.fetchSubCategories();
     this.fetchCategoryDetails();
+    // Scroll to the top when the page is loaded
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
   fetchSubCategories = () => {
@@ -80,12 +83,6 @@ class SubCategories extends React.Component<
       });
   };
 
-  handleClick = (e: { key: string }) => {
-    this.setState({
-      current: e.key,
-    });
-  };
-
   setCurrent = (subCategoryId: string) => {
     this.setState({
       current: subCategoryId,
@@ -105,7 +102,7 @@ class SubCategories extends React.Component<
     return (
       <Router>
         <Row className={styles.mainContent}>
-          <Col md={20}>
+          <Col md={20} className={styles.headerWrapper}>
             <PageHeader
               className={styles.pageHeader}
               onBack={this.onBack}
@@ -119,11 +116,7 @@ class SubCategories extends React.Component<
         </Row>
         <Row className={styles.mainContent}>
           <Col md={20}>
-            <Menu
-              mode="horizontal"
-              onClick={this.handleClick}
-              selectedKeys={[this.state.current]}
-            >
+            <Row className={styles.subCategoryWrapperRow}>
               {this.state.subCategories.map((subCategory) => {
                 // Replace spaces and slashes from the subcategory name to include it on the URL
                 const categoryName = title
@@ -131,16 +124,27 @@ class SubCategories extends React.Component<
                   .replace(/\s+|\//g, '-')
                   .toLowerCase();
                 return (
-                  <Menu.Item key={subCategory.id} className={styles.menuItem}>
+                  <Button
+                    key={subCategory.id}
+                    className={styles.subCategoryButton}
+                    shape="round"
+                    type={
+                      this.state.current == subCategory.id.toString()
+                        ? 'primary'
+                        : undefined
+                    }
+                    size="large"
+                    onClick={() => this.setCurrent(subCategory.id.toString())}
+                  >
                     <Link
                       to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}`}
                     >
                       {subCategory.translations[0].name}
                     </Link>
-                  </Menu.Item>
+                  </Button>
                 );
               })}
-            </Menu>
+            </Row>
           </Col>
         </Row>
         <Row className={styles.mainContent}>
