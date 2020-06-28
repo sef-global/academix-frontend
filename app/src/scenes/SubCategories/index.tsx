@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import axios, { AxiosResponse } from 'axios';
 import { handleApiError } from '../../services/util/errorHandler';
 import { SubCategoryStateProps, CategoryUrlParams } from './interfaces';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, Switch } from 'react-router';
 import { Button, Col, PageHeader, Row, Typography } from 'antd';
 import {
   Link,
@@ -99,6 +99,11 @@ class SubCategories extends React.Component<
     if (this.state.category != null) {
       title = this.state.category.translations[0].name;
     }
+    // Replace spaces and slashes from the subcategory name to include it on the URL
+    const categoryName = title
+      .trim()
+      .replace(/\s+|\//g, '-')
+      .toLowerCase();
     return (
       <Router>
         <Row className={styles.mainContent}>
@@ -118,11 +123,6 @@ class SubCategories extends React.Component<
           <Col md={20}>
             <Row className={styles.subCategoryWrapperRow}>
               {this.state.subCategories.map((subCategory) => {
-                // Replace spaces and slashes from the subcategory name to include it on the URL
-                const categoryName = title
-                  .trim()
-                  .replace(/\s+|\//g, '-')
-                  .toLowerCase();
                 return (
                   <Button
                     key={subCategory.id}
@@ -149,16 +149,19 @@ class SubCategories extends React.Component<
         </Row>
         <Row className={styles.mainContent}>
           <Col md={20}>
-            <Route path="/academix/:categoryId/:categoryName/:subCategoryId">
-              <Items setCurrent={this.setCurrent} />
-            </Route>
-            {/* Todo: Use history.push to redirect to the first subcategory*/}
-            {this.state.subCategories.length > 0 && (
-              <Redirect
-                exact
-                to={`${this.props.match.url}/${this.state.subCategories[0].id}`}
-              />
-            )}
+            <Switch>
+              <Route path="/academix/:categoryId/:categoryName/:subCategoryId">
+                <Items setCurrent={this.setCurrent} />
+              </Route>
+              {/* Todo: Use history.push to redirect to the first subcategory*/}
+              <Route exact path={'/academix/:categoryId/:categoryName'}>
+                {this.state.subCategories.length > 0 && (
+                  <Redirect
+                    to={`${this.props.match.url}/${this.state.subCategories[0].id}`}
+                  />
+                )}
+              </Route>
+            </Switch>
           </Col>
         </Row>
       </Router>
