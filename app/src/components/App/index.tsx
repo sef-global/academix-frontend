@@ -12,6 +12,7 @@ import {
   FacebookFilled,
   TwitterSquareFilled,
   LinkedinFilled,
+  MenuOutlined,
 } from '@ant-design/icons';
 
 const { Header, Content, Footer } = Layout;
@@ -26,12 +27,16 @@ class App extends React.Component<AppProps> {
       <Router>
         <Layout style={{ background: '#fff' }}>
           <Header className={styles.header}>
-            <div className={styles.logo}>
-              <a href="https://sefglobal.org/">
-                <img src={seflogo} alt="SEF Logo" />
-              </a>
-            </div>
-            <Menu theme="light" mode="horizontal">
+            <Menu
+              theme="light"
+              mode="horizontal"
+              overflowedIndicator={<MenuOutlined />}
+            >
+              <Menu.Item key="0">
+                <a href="https://sefglobal.org/">
+                  <img className={styles.logo} src={seflogo} alt="SEF Logo" />
+                </a>
+              </Menu.Item>
               <Menu.Item key="1">
                 <a href="https://sefglobal.org/">Home</a>
               </Menu.Item>
@@ -72,19 +77,10 @@ class App extends React.Component<AppProps> {
             </Switch>
           </Content>
           <Footer className={styles.footer}>
-            <Menu
-              theme="light"
-              mode="horizontal"
-              style={{ background: '#f0f2f5' }}
-            >
-              <Menu.Item key="1">
-                © 2020{' '}
-                <a href="https://sefglobal.org/">
-                  {' '}
-                  Sustainable Education Foundation - SEF
-                </a>
-              </Menu.Item>
-            </Menu>
+            © 2020
+            <a className={styles.footerLink} href="https://sefglobal.org/">
+              Sustainable Education Foundation - SEF
+            </a>
           </Footer>
         </Layout>
       </Router>
