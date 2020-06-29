@@ -16,12 +16,20 @@ class Home extends React.Component {
         <Col md={24} lg={21}>
           <Row className={styles.mainContent}>
             <Col md={10} className={styles.descriptionContent}>
-              <img src={logo} alt="Academix Logo" width={350} />
+              <img src={logo} alt="Academix Logo" className={styles.logo} />
               <p className={styles.description}>
                 AcadeMix aims to curate a collection of free education resources
                 available for Sri Lankan students to maximise their learning
                 potential from Primary through to Post Graduate education and
                 beyond.
+              </p>
+              <p className={styles.descriptionContact}>
+                If you have a website, blog or channel that features free
+                education content to support curriculum in Sri Lanka, do share
+                with us at&nbsp;
+                <a href="mailto:info@sefglobal.org">info@sefglobal.org.</a> We
+                also welcome any organisation that is keen on collaborating with
+                us to join forces.
               </p>
               <Row>
                 <Title level={4}>

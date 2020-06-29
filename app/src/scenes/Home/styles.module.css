@@ -3,12 +3,20 @@
 }
 
 .descriptionContent {
-    padding-top: 180px;
+    padding-top: 100px;
     text-align: justify;
 }
 
 .description {
-    padding-top: 30px;
     font-size: 1.3em;
+}
+
+.descriptionContact {
     margin-bottom: 30px;
+    font-size: 1.3em;
+}
+
+.logo{
+    padding-bottom: 30px;
+    width: 350px;
 }
