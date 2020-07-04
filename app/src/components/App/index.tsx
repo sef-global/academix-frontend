@@ -7,6 +7,7 @@ import { AppProps } from './interfaces';
 import { Layout, Menu } from 'antd';
 import styles from './styles.css';
 import seflogo from '../../../public/logo.png';
+import ReactGA from 'react-ga';
 import {
   InstagramFilled,
   FacebookFilled,
@@ -14,6 +15,9 @@ import {
   LinkedinFilled,
   MenuOutlined,
 } from '@ant-design/icons';
+
+const trackingId = 'UA-167873271-2';
+ReactGA.initialize(trackingId);
 
 const { Header, Content, Footer } = Layout;
 
@@ -23,6 +27,7 @@ class App extends React.Component<AppProps> {
   }
 
   render() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     return (
       <Router>
         <Layout style={{ background: '#fff' }}>
