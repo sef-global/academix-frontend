@@ -7,6 +7,7 @@ export interface SingleRoute {
 
 export interface SubCategory {
   id: number;
+  name: string;
   translations: SubCategoryTranslation[];
 }
 
