@@ -99,7 +99,7 @@ class SubCategories extends React.Component<
     if (this.state.category != null) {
       title = this.state.category.translations[0].name;
     }
-    // Replace spaces and slashes from the subcategory name to include it on the URL
+    // Replace spaces and slashes from the category name to include it on the URL
     const categoryName = title
       .trim()
       .replace(/\s+|\//g, '-')
@@ -123,6 +123,11 @@ class SubCategories extends React.Component<
           <Col md={20}>
             <Row className={styles.subCategoryWrapperRow}>
               {this.state.subCategories.map((subCategory) => {
+                // Replace spaces and slashes from the subcategory name to include it on the URL
+                const subCategoryName = subCategory.name
+                  .trim()
+                  .replace(/\s+|\//g, '-')
+                  .toLowerCase();
                 return (
                   <Button
                     key={subCategory.id}
@@ -137,7 +142,7 @@ class SubCategories extends React.Component<
                     onClick={() => this.setCurrent(subCategory.id.toString())}
                   >
                     <Link
-                      to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}`}
+                      to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}/${subCategoryName}`}
                     >
                       {subCategory.translations[0].name}
                     </Link>
@@ -150,14 +155,19 @@ class SubCategories extends React.Component<
         <Row className={styles.mainContent}>
           <Col md={20}>
             <Switch>
-              <Route path="/academix/:categoryId/:categoryName/:subCategoryId">
+              <Route path="/academix/:categoryId/:categoryName/:subCategoryId/:subCategoryName">
                 <Items setCurrent={this.setCurrent} />
               </Route>
               {/* Todo: Use history.push to redirect to the first subcategory*/}
               <Route exact path={'/academix/:categoryId/:categoryName'}>
                 {this.state.subCategories.length > 0 && (
                   <Redirect
-                    to={`${this.props.match.url}/${this.state.subCategories[0].id}`}
+                    to={`${this.props.match.url}/${
+                      this.state.subCategories[0].id
+                    }/${this.state.subCategories[0].name
+                      .trim()
+                      .replace(/\s+|\//g, '-')
+                      .toLowerCase()}`}
                   />
                 )}
               </Route>
