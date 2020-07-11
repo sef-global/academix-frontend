@@ -99,9 +99,9 @@ class Items extends React.Component<
           renderItem={(item) => (
             <List.Item key={item.id}>
               <Card>
-                <Title level={4}>{item.translations[0].name}</Title>
+                <Title level={4}>{item.name}</Title>
                 <Paragraph ellipsis={{ rows: 8, expandable: true }}>
-                  {item.translations[0].description}
+                  {item.description}
                 </Paragraph>
                 <Row className={styles.cardRounded}>
                   <Button

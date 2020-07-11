@@ -10,6 +10,8 @@ export interface ItemStateProps {
 
 export interface Item {
   id: number;
+  name: string;
+  description: string;
   link: string;
   translations: ItemTranslation[];
 }

@@ -42,7 +42,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
         <Row>
           {this.state.categories.map((category) => {
             // Replace spaces and slashes from the category name to include it on the URL
-            const categoryName = category.translations[0].name
+            const categoryName = category.name
               .trim()
               .replace(/\s+|\//g, '-')
               .toLowerCase();
@@ -51,7 +51,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
                 <Link to={`/academix/${category.id}/${categoryName}`}>
                   <Card hoverable className={styles.card} bordered={true}>
                     <h1 className={styles.categoryName}>
-                      <BookOutlined /> {category.translations[0].name}
+                      <BookOutlined /> {category.name}
                     </h1>
                   </Card>
                 </Link>
