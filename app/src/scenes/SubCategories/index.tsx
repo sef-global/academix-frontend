@@ -97,7 +97,7 @@ class SubCategories extends React.Component<
     const { Title } = Typography;
     let title = '';
     if (this.state.category != null) {
-      title = this.state.category.translations[0].name;
+      title = this.state.category.name;
     }
     // Replace spaces and slashes from the category name to include it on the URL
     const categoryName = title
@@ -144,7 +144,7 @@ class SubCategories extends React.Component<
                     <Link
                       to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}/${subCategoryName}`}
                     >
-                      {subCategory.translations[0].name}
+                      {subCategory.name}
                     </Link>
                   </Button>
                 );

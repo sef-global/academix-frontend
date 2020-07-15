@@ -18,6 +18,7 @@ export interface SubCategoryTranslation {
 
 export interface Category {
   id: number;
+  name: string;
   translations: CategoryTranslation[];
 }
 
