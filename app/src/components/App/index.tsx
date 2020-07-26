@@ -16,8 +16,8 @@ import {
   MenuOutlined,
 } from '@ant-design/icons';
 
-const trackingId = 'UA-167873271-2';
-ReactGA.initialize(trackingId);
+// Initialize google analytics using the tracking code
+ReactGA.initialize('UA-167873271-2');
 
 const { Header, Content, Footer } = Layout;
 
@@ -27,7 +27,6 @@ class App extends React.Component<AppProps> {
   }
 
   render() {
-    ReactGA.pageview(window.location.pathname + window.location.search);
     return (
       <Router>
         <Layout style={{ background: '#fff' }}>
