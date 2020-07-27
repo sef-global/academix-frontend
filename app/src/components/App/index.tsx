@@ -7,6 +7,7 @@ import { AppProps } from './interfaces';
 import { Layout, Menu } from 'antd';
 import styles from './styles.css';
 import seflogo from '../../../public/logo.png';
+import ReactGA from 'react-ga';
 import {
   InstagramFilled,
   FacebookFilled,
@@ -14,6 +15,9 @@ import {
   LinkedinFilled,
   MenuOutlined,
 } from '@ant-design/icons';
+
+// Initialize google analytics using the tracking code
+ReactGA.initialize('UA-167873271-2');
 
 const { Header, Content, Footer } = Layout;
 

@@ -11,6 +11,7 @@ import { List, Button, Card, Row, Typography, Col } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router';
 import styles from './styles.module.css';
+import { trackPageWithGoogleAnalytics } from '../../../../services/util/googleAnalytics';
 
 class Items extends React.Component<
   RouteComponentProps<ItemUrlParams> & ItemProps,
@@ -36,6 +37,7 @@ class Items extends React.Component<
 
   componentDidMount() {
     this.fetchItems();
+    trackPageWithGoogleAnalytics();
   }
 
   fetchItems = (pageNo = 1) => {
@@ -71,6 +73,7 @@ class Items extends React.Component<
     if (this.SubCategoryId !== this.props.match.params.subCategoryId) {
       this.SubCategoryId = this.props.match.params.subCategoryId;
       this.fetchItems();
+      trackPageWithGoogleAnalytics();
     }
   }
 

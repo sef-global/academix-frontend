@@ -7,6 +7,7 @@ import { CategoryStateProps } from './interfaces';
 import { Link } from 'react-router-dom';
 import { BookOutlined } from '@ant-design/icons';
 import { Category } from '../../../../interfaces';
+import { trackPageWithGoogleAnalytics } from '../../../../services/util/googleAnalytics';
 
 class Categories extends React.Component<{}, CategoryStateProps> {
   constructor(props: {}) {
@@ -34,6 +35,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
           'Something went wrong when trying to load categories'
         );
       });
+    trackPageWithGoogleAnalytics();
   }
 
   render() {
