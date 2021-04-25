@@ -51,7 +51,7 @@ class App extends React.Component<AppProps> {
                 <a href="https://sefglobal.org/team.html">Team</a>
               </Menu.Item>
               <Menu.Item key="4">
-                <a href="https://blog.sefglobal.org/">Blog</a>
+                <a href="https://sefglobal.medium.com/">Blog</a>
               </Menu.Item>
               <Menu.Item key="5">
                 <a href="https://sefglobal.org/join-us.html">Join Us</a>
