@@ -6,11 +6,13 @@
     "antd": "^4.2.0",
     "axios": "latest",
     "lodash": "^4.17.15",
+    "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-ga": "3.1.1",
+    "react-moment": "^1.1.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "react-ga": "3.1.1"
+    "react-scripts": "3.4.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",

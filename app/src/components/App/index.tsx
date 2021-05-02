@@ -8,6 +8,7 @@ import { Layout, Menu } from 'antd';
 import styles from './styles.css';
 import seflogo from '../../../public/logo.png';
 import ReactGA from 'react-ga';
+import Moment from 'react-moment';
 import {
   InstagramFilled,
   FacebookFilled,
@@ -20,7 +21,7 @@ import {
 ReactGA.initialize('UA-167873271-2');
 
 const { Header, Content, Footer } = Layout;
-
+const date = new Date();
 class App extends React.Component<AppProps> {
   constructor(props: AppProps) {
     super(props);
@@ -81,7 +82,7 @@ class App extends React.Component<AppProps> {
             </Switch>
           </Content>
           <Footer className={styles.footer}>
-            © 2020
+            © <Moment format="YYYY">{date}</Moment>
             <a className={styles.footerLink} href="https://sefglobal.org/">
               Sustainable Education Foundation - SEF
             </a>
