@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Typography } from 'antd';
 import styles from './styles.module.css';
 import heroImg from './hero.jpg';
-import logo from '../../../public/academix-logo.png';
+import logo from '../../../public/logo.png';
 import Categories from './components/catogories';
 import SLEFLogo from './SLEFLogo.png';
 

@@ -40,9 +40,9 @@
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.5.0",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.0",
     "prettier": "^2.0.5",
-    "sass-loader": "^6.0.7",
+    "sass-loader": "^10.1.1",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.18.2",
     "ts-loader": "^7.0.2",
@@ -51,9 +51,9 @@
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development",
     "watch": "webpack --watch --mode development --progress",
-    "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 webpack -p --display errors-only --hide-modules",
+    "build": "webpack --mode production",
     "build_dev": "NODE_ENV=development webpack -d --watch ",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

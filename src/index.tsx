@@ -9,12 +9,12 @@ import SubCategories from './scenes/SubCategories';
 
 const routes: SingleRoute[] = [
   {
-    path: '/academix',
+    path: '/',
     exact: true,
     component: Home,
   },
   {
-    path: '/academix/:categoryId/:categoryName',
+    path: '/:categoryId/:categoryName',
     exact: false,
     component: SubCategories,
   },
