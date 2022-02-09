@@ -17,6 +17,7 @@ class RouteWithSubRoutes extends React.Component<RouteWithSubRoutesProps> {
         path={this.props.path}
         exact={this.props.exact}
         render={(props) => (
+          // @ts-ignore
           <this.props.component
             {...props}
             {...this.props}

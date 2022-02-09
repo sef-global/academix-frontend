@@ -8,6 +8,7 @@ const path = require("path");
 
 const config = {
   mode: 'production',
+  entry: './src/index.tsx',
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
@@ -21,7 +22,7 @@ const config = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
-    port: 80,
+    port: process.env.PORT || 3000,
     historyApiFallback: true,
     open: true,
     hotOnly: true,
@@ -130,7 +131,6 @@ const config = {
   plugins: [
     new HtmlWebPackPlugin({
       template: './public/index.html',
-      filename: './index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
