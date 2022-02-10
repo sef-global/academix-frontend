@@ -46,7 +46,7 @@ class Items extends React.Component<
     this.setState({ isLoading: true });
     axios
       .get(
-          `${API_URL}/core/academix/sub-categories/` +
+          `${API_URL}/academix/sub-categories/` +
           `${this.SubCategoryId}/items?pageNumber=${pageNumber}&pageSize=${this.pageSize}`
       )
       .then((result: AxiosResponse<ItemPayload>) => {

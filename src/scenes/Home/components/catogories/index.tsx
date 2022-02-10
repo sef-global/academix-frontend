@@ -20,7 +20,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
 
   componentDidMount() {
     axios
-      .get(`${API_URL}/core/academix/categories`)
+      .get(`${API_URL}/academix/categories`)
       .then((result: AxiosResponse<Category[]>) => {
         if (result.status == 200) {
           this.setState({

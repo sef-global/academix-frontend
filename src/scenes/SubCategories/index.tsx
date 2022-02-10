@@ -42,7 +42,7 @@ class SubCategories extends React.Component<
   fetchSubCategories = () => {
     axios
       .get(
-        `${API_URL}/core/academix/categories/${this.CategoryId}/sub-categories`
+        `${API_URL}/academix/categories/${this.CategoryId}/sub-categories`
       )
       .then((result: AxiosResponse<SubCategory[]>) => {
         if (result.status == 200) {
@@ -63,7 +63,7 @@ class SubCategories extends React.Component<
 
   fetchCategoryDetails = () => {
     axios
-      .get(`${API_URL}/core/academix/categories/${this.CategoryId}`)
+      .get(`${API_URL}/academix/categories/${this.CategoryId}`)
       .then((result: AxiosResponse<Category>) => {
         if (result.status == 200) {
           this.setState({
