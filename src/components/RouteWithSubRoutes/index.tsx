@@ -6,7 +6,7 @@ interface RouteWithSubRoutesProps {
   path: string;
   exact: boolean;
   routes?: SingleRoute[];
-  component: React.ElementRef<any>;
+  component: React.ComponentClass<any>;
   key?: string;
 }
 
