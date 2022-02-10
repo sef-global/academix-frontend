@@ -4,9 +4,11 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const path = require("path");
 
 const config = {
   mode: 'production',
+  entry: './src/index.tsx',
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
@@ -16,7 +18,14 @@ const config = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   output: {
-    publicPath: '/academix/',
+    publicPath: '/',
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'public/'),
+    port: process.env.PORT || 3000,
+    historyApiFallback: true,
+    open: true,
+    hotOnly: true,
   },
 
   module: {
@@ -121,8 +130,7 @@ const config = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
+      template: './public/index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

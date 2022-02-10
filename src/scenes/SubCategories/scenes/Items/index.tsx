@@ -12,6 +12,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router';
 import styles from './styles.module.css';
 import { trackPageWithGoogleAnalytics } from '../../../../services/util/googleAnalytics';
+import { API_URL } from '../../../../contants';
 
 class Items extends React.Component<
   RouteComponentProps<ItemUrlParams> & ItemProps,
@@ -45,8 +46,7 @@ class Items extends React.Component<
     this.setState({ isLoading: true });
     axios
       .get(
-        window.location.origin +
-          '/core/academix/sub-categories/' +
+          `${API_URL}/core/academix/sub-categories/` +
           `${this.SubCategoryId}/items?pageNumber=${pageNumber}&pageSize=${this.pageSize}`
       )
       .then((result: AxiosResponse<ItemPayload>) => {

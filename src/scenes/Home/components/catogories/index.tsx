@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { BookOutlined } from '@ant-design/icons';
 import { Category } from '../../../../interfaces';
 import { trackPageWithGoogleAnalytics } from '../../../../services/util/googleAnalytics';
+import { API_URL } from '../../../../contants';
 
 class Categories extends React.Component<{}, CategoryStateProps> {
   constructor(props: {}) {
@@ -19,7 +20,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
 
   componentDidMount() {
     axios
-      .get(window.location.origin + '/core/academix/categories')
+      .get(`${API_URL}/core/academix/categories`)
       .then((result: AxiosResponse<Category[]>) => {
         if (result.status == 200) {
           this.setState({
