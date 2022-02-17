@@ -88,7 +88,7 @@ class SubCategories extends React.Component<
   };
 
   onBack = () => {
-    this.props.history.push("/academix");
+    this.props.history.push("/");
   };
 
   render() {
@@ -140,7 +140,7 @@ class SubCategories extends React.Component<
                     onClick={() => this.setCurrent(subCategory.id.toString())}
                   >
                     <Link
-                      to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}/${subCategoryName}`}
+                      to={`/${this.CategoryId}/${categoryName}/${subCategory.id}/${subCategoryName}`}
                     >
                       {subCategory.name}
                     </Link>
@@ -153,11 +153,11 @@ class SubCategories extends React.Component<
         <Row className={styles.mainContent}>
           <Col md={20}>
             <Switch>
-              <Route path="/academix/:categoryId/:categoryName/:subCategoryId/:subCategoryName">
+              <Route path="/:categoryId/:categoryName/:subCategoryId/:subCategoryName">
                 <Items setCurrent={this.setCurrent} />
               </Route>
               {/* Todo: Use history.push to redirect to the first subcategory*/}
-              <Route exact path={"/academix/:categoryId/:categoryName"}>
+              <Route exact path={"/:categoryId/:categoryName"}>
                 {this.state.subCategories.length > 0 && (
                   <Redirect
                     to={`${this.props.match.url}/${

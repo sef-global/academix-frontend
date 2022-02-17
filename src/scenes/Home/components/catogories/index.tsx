@@ -51,7 +51,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
               .toLowerCase();
             return (
               <Col key={category.id} md={8}>
-                <Link to={`/academix/${category.id}/${categoryName}`}>
+                <Link to={`/${category.id}/${categoryName}`}>
                   <Card hoverable className={styles.card} bordered={true}>
                     <h1 className={styles.categoryName}>
                       <BookOutlined /> {category.name}
