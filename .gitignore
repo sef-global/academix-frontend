@@ -21,8 +21,8 @@ node_modules/
 /coverage
 
 # production
-app/dist/
-app/tmp/
+dist/
+tmp/
 # misc
 .DS_Store
 .env.local

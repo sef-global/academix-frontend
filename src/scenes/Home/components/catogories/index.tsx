@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { BookOutlined } from '@ant-design/icons';
 import { Category } from '../../../../interfaces';
 import { trackPageWithGoogleAnalytics } from '../../../../services/util/googleAnalytics';
+import { API_URL } from '../../../../contants';
 
 class Categories extends React.Component<{}, CategoryStateProps> {
   constructor(props: {}) {
@@ -19,7 +20,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
 
   componentDidMount() {
     axios
-      .get(window.location.origin + '/core/academix/categories')
+      .get(`${API_URL}/academix/categories`)
       .then((result: AxiosResponse<Category[]>) => {
         if (result.status == 200) {
           this.setState({
@@ -50,7 +51,7 @@ class Categories extends React.Component<{}, CategoryStateProps> {
               .toLowerCase();
             return (
               <Col key={category.id} md={8}>
-                <Link to={`/academix/${category.id}/${categoryName}`}>
+                <Link to={`/${category.id}/${categoryName}`}>
                   <Card hoverable className={styles.card} bordered={true}>
                     <h1 className={styles.categoryName}>
                       <BookOutlined /> {category.name}

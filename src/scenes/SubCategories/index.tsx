@@ -1,19 +1,20 @@
-import React from 'react';
-import styles from './styles.module.css';
-import axios, { AxiosResponse } from 'axios';
-import { handleApiError } from '../../services/util/errorHandler';
-import { SubCategoryStateProps, CategoryUrlParams } from './interfaces';
-import { RouteComponentProps, Switch } from 'react-router';
-import { Button, Col, PageHeader, Row, Typography } from 'antd';
+import React from "react";
+import styles from "./styles.module.css";
+import axios, { AxiosResponse } from "axios";
+import { handleApiError } from "../../services/util/errorHandler";
+import { SubCategoryStateProps, CategoryUrlParams } from "./interfaces";
+import { RouteComponentProps, Switch } from "react-router";
+import { Button, Col, PageHeader, Row, Typography } from "antd";
 import {
   Link,
   Route,
   BrowserRouter as Router,
   withRouter,
   Redirect,
-} from 'react-router-dom';
-import { Category, SubCategory } from '../../interfaces';
-import Items from './scenes/Items';
+} from "react-router-dom";
+import { Category, SubCategory } from "../../interfaces";
+import Items from "./scenes/Items";
+import { API_URL } from "../../contants";
 
 class SubCategories extends React.Component<
   RouteComponentProps<CategoryUrlParams>,
@@ -26,7 +27,7 @@ class SubCategories extends React.Component<
     this.state = {
       subCategories: [],
       category: null,
-      current: '',
+      current: "",
     };
   }
 
@@ -41,8 +42,7 @@ class SubCategories extends React.Component<
   fetchSubCategories = () => {
     axios
       .get(
-        window.location.origin +
-          `/core/academix/categories/${this.CategoryId}/sub-categories`
+        `${API_URL}/academix/categories/${this.CategoryId}/sub-categories`
       )
       .then((result: AxiosResponse<SubCategory[]>) => {
         if (result.status == 200) {
@@ -56,16 +56,14 @@ class SubCategories extends React.Component<
       .catch((error) => {
         handleApiError(
           error,
-          'Something went wrong when trying to load subcategories'
+          "Something went wrong when trying to load subcategories"
         );
       });
   };
 
   fetchCategoryDetails = () => {
     axios
-      .get(
-        window.location.origin + `/core/academix/categories/${this.CategoryId}`
-      )
+      .get(`${API_URL}/academix/categories/${this.CategoryId}`)
       .then((result: AxiosResponse<Category>) => {
         if (result.status == 200) {
           this.setState({
@@ -78,7 +76,7 @@ class SubCategories extends React.Component<
       .catch((error) => {
         handleApiError(
           error,
-          'Something went wrong when trying to load category details'
+          "Something went wrong when trying to load category details"
         );
       });
   };
@@ -90,19 +88,19 @@ class SubCategories extends React.Component<
   };
 
   onBack = () => {
-    this.props.history.push('/academix');
+    this.props.history.push("/");
   };
 
   render() {
     const { Title } = Typography;
-    let title = '';
+    let title = "";
     if (this.state.category != null) {
       title = this.state.category.name;
     }
     // Replace spaces and slashes from the category name to include it on the URL
     const categoryName = title
       .trim()
-      .replace(/\s+|\//g, '-')
+      .replace(/\s+|\//g, "-")
       .toLowerCase();
     return (
       <Router>
@@ -126,7 +124,7 @@ class SubCategories extends React.Component<
                 // Replace spaces and slashes from the subcategory name to include it on the URL
                 const subCategoryName = subCategory.name
                   .trim()
-                  .replace(/\s+|\//g, '-')
+                  .replace(/\s+|\//g, "-")
                   .toLowerCase();
                 return (
                   <Button
@@ -135,14 +133,14 @@ class SubCategories extends React.Component<
                     shape="round"
                     type={
                       this.state.current == subCategory.id.toString()
-                        ? 'primary'
+                        ? "primary"
                         : undefined
                     }
                     size="large"
                     onClick={() => this.setCurrent(subCategory.id.toString())}
                   >
                     <Link
-                      to={`/academix/${this.CategoryId}/${categoryName}/${subCategory.id}/${subCategoryName}`}
+                      to={`/${this.CategoryId}/${categoryName}/${subCategory.id}/${subCategoryName}`}
                     >
                       {subCategory.name}
                     </Link>
@@ -155,18 +153,18 @@ class SubCategories extends React.Component<
         <Row className={styles.mainContent}>
           <Col md={20}>
             <Switch>
-              <Route path="/academix/:categoryId/:categoryName/:subCategoryId/:subCategoryName">
+              <Route path="/:categoryId/:categoryName/:subCategoryId/:subCategoryName">
                 <Items setCurrent={this.setCurrent} />
               </Route>
               {/* Todo: Use history.push to redirect to the first subcategory*/}
-              <Route exact path={'/academix/:categoryId/:categoryName'}>
+              <Route exact path={"/:categoryId/:categoryName"}>
                 {this.state.subCategories.length > 0 && (
                   <Redirect
                     to={`${this.props.match.url}/${
                       this.state.subCategories[0].id
                     }/${this.state.subCategories[0].name
                       .trim()
-                      .replace(/\s+|\//g, '-')
+                      .replace(/\s+|\//g, "-")
                       .toLowerCase()}`}
                   />
                 )}
