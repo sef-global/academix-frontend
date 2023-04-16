@@ -1,1 +1,1 @@
-export const API_URL = 'https://sef-core.herokuapp.com';
+export const API_URL = 'https://core.sefglobal.org';
